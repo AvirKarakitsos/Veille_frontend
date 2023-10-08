@@ -1,7 +1,7 @@
 import InputText from '../../components/InputText'
 import Select from '../../components/Select'
 
-import styles from '../../assets/styles/Form.modules.css'
+import styles from './Form.module.css'
 import { useState } from 'react'
 import { useEffect } from 'react'
 
