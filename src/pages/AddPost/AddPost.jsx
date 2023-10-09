@@ -8,6 +8,8 @@ import { useEffect } from 'react'
 function AddPost() {
     const [data, setData] = useState({
         title: "",
+        source: "",
+        link: "",
         categoryId: "",
         authorId: ""
     })
@@ -63,16 +65,20 @@ function AddPost() {
                         setData( values => ( {
                             ...values,
                             title: '',
+                            source: '',
+                            link: '',
                             authorId: '',
                             categoryId: ''
                         } ))
+                        document.querySelector("[name='source']").value = ""
+                        document.querySelector("[name='categoryId']").value = ""
+                        document.querySelector("[name='authorId']").value = ""
                     } 
                     return response.json()
                 })
                 .then(response => {
                     document.querySelector('.form-message').innerHTML = ""
                     console.log(response.message)
-                    
                 })
                 .catch(err => console.log(err.message))
         }
@@ -82,28 +88,44 @@ function AddPost() {
         <>
             <h2>Formulaire</h2>
             <form className={styles["form-container"]} onSubmit={handleAdd}>
-                <label>Titre</label>
-                <InputText style={styles["input-style"]} string="title" value={data.title} onChange={onChange}/>
+                <label className={styles["label-style"]}>Titre
+                    <InputText style={styles["input-style"]} string="title" value={data.title} onChange={onChange}/>
+                </label>
 
-                <label>Catégorie</label>
-                {!isLoading.categories && <Select style={styles["input-style"]} string="categoryId" onChange={onChange}>
-                    <option value=""></option>
-                    {categories.map((category) => {
-                    
-                        return (<option key={category._id} value={category._id}>{category.title}</option>)
-                        
-                    })}
-                </Select>}
+                <label className={styles["label-style"]}>Source
+                    <Select style={styles["input-style"]} string="source" onChange={onChange}>
+                        <option value=""></option>
+                        <option value="twitter">Twitter</option>
+                        <option value="youtube">Youtube</option>
+                        <option value="article">Article</option>
+                    </Select>
+                </label>
 
-                <label>Auteur</label>
-                {!isLoading.authors && <Select style={styles["input-style"]} string="authorId" onChange={onChange}>
-                    <option value=""></option>
-                    {authors.map((author) => {
+                <label className={styles["label-style"]}>Lien
+                    <InputText style={styles["input-style"]} string="link" value={data.link} onChange={onChange}/>
+                </label>
+
+                <label className={styles["label-style"]}>Catégorie
+                    {!isLoading.categories && <Select style={styles["input-style"]} string="categoryId" onChange={onChange}>
+                        <option value=""></option>
+                        {categories.map((category) => {
                         
-                        return (<option key={author._id} value={author._id}>{author.name}</option>)
-                        
-                    })}
-                </Select>}
+                            return (<option key={category._id} value={category._id}>{category.title}</option>)
+                            
+                        })}
+                    </Select>}
+                </label>
+
+                <label className={styles["label-style"]}>Auteur
+                    {!isLoading.authors && <Select style={styles["input-style"]} string="authorId" onChange={onChange}>
+                        <option value=""></option>
+                        {authors.map((author) => {
+
+                            return (<option key={author._id} value={author._id}>{author.name}</option>)
+
+                        })}
+                    </Select>}
+                </label>
 
                 <p className='form-message'></p>
 
