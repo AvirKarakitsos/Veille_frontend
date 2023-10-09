@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import InputText from '../../components/InputText'
 import Select from '../../components/Select'
 
@@ -131,6 +132,7 @@ function AddPost() {
 
                 <button type="submit">Valider</button>
             </form>
+            <Link to="/">{"Retour à la page d'accueil"}</Link>
         </>
     )
 }
