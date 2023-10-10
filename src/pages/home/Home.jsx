@@ -1,3 +1,4 @@
+import styles from './Home.module.css'
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import Post from "../../components/Post"
@@ -31,10 +32,12 @@ function Home() {
     return (
         <>
             <h2>Home Page</h2>
-            <Link to="/post">Ajouter un post</Link>
-            <label>Rechercher
-                <input type="text" onChange={(e) => setSearch(e.target.value)} value={search} onInput={handleSearch}/>
-            </label>
+            <Link to="/create">Ajouter un post</Link>
+            <div>
+                <label className={styles["label-style"]}>Rechercher
+                    <input className={styles["input-style"]} type="text" onChange={(e) => setSearch(e.target.value)} value={search} onInput={handleSearch}/>
+                </label>
+            </div>
             {!isLoading && posts.map((post) => <Post key={post._id} post={post}/>)}
 
         </>

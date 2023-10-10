@@ -5,6 +5,7 @@ import './index.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import Home from './pages/home/Home.jsx'
 import AddPost from './pages/AddPost/AddPost.jsx'
+import PostPage from './pages/PostPage/PostPage.jsx'
 
 const router = createBrowserRouter([
   {
@@ -12,7 +13,8 @@ const router = createBrowserRouter([
     element: <App/>,
     children: [
       {path: '/', element: <Home/>},
-      {path: '/post', element: <AddPost/>}
+      {path: '/post/:id', element: <PostPage/>},
+      {path: '/create', element: <AddPost/>},
     ]
   }
 ])

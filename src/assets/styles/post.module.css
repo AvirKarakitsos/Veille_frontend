@@ -2,11 +2,18 @@
     width: 450px;
     padding: 0px 15px;
     margin: 15px 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     border: 1px solid #000;
     border-radius: 10px;
+}
+.container:hover {
+    border: 1px solid #29C5F6;
+}
+
+.container__link {
+   width: 100%;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
 }
 
 .container__sub {

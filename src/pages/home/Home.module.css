@@ -1,0 +1,13 @@
+.label-style {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    column-gap: 5px;
+}
+
+.input-style {
+    height: 35px;
+    width: 250px;
+    margin: 15px 0;
+}
