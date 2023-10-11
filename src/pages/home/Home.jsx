@@ -2,20 +2,53 @@ import styles from './Home.module.css'
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import Post from "../../components/Post"
+import Select from '../../components/Select'
 
 function Home() {
     const [posts,setPosts] = useState(null)
-    const [search,setSearch] = useState("")
-    const [isLoading, setIsLoading] = useState(true)
+    const [data,setData] = useState({
+        search: "",
+        category: "all"
+    })
+    const [categories,setCategories] = useState(null)
+    const [isLoading, setIsLoading] = useState({posts: true, categories: true})
 
     useEffect(()=>{
-        fetch("http://localhost:4000/api/posts")
+        if( data.category === "all") {
+            fetch("http://localhost:4000/api/posts")
+                .then((response) => response.json())
+                .then((response) => {
+                    setPosts(response)
+                    setIsLoading((values) => ({
+                        ...values,
+                        posts: false
+                    }))
+                })
+        } else {
+            fetch(`http://localhost:4000/api/posts?categoryId=${data.category}`)
+                .then((response) => response.json())
+                .then((response) => setPosts(response))
+        }
+    },[data.category])
+
+    useEffect(()=>{ 
+        fetch("http://localhost:4000/api/categories")
             .then((response) => response.json())
             .then((response) => {
-                setPosts(response)
-                setIsLoading(false)
+                setCategories(response)
+                setIsLoading((values) => ({
+                    ...values,
+                    categories: false
+                }))
             })
     },[])
+
+    function onChange(e) {
+        setData({
+            ...data,
+            [e.target.name]: e.target.value
+        })
+    }
 
     function handleSearch(e) {
         if(e.target.value.length >=3) {
@@ -35,10 +68,16 @@ function Home() {
             <Link to="/create">Ajouter un post</Link>
             <div>
                 <label className={styles["label-style"]}>Rechercher
-                    <input className={styles["input-style"]} type="text" onChange={(e) => setSearch(e.target.value)} value={search} onInput={handleSearch}/>
+                    <input className={styles["input-style"]} name='search' type="text" onChange={onChange} value={data.search} onInput={handleSearch}/>
+                </label>
+                <label className={styles["label-style"]}> Catégorie
+                    <Select style={styles["input-style"]} string="category" onChange={onChange}>
+                        <option value="all">Tout</option>
+                        {!isLoading.categories && categories.map((category) => <option key={category._id} value={category._id}>{category.title}</option>)}
+                    </Select>
                 </label>
             </div>
-            {!isLoading && posts.map((post) => <Post key={post._id} post={post}/>)}
+            {!isLoading.posts && posts.map((post) => <Post key={post._id} post={post}/>)}
 
         </>
     )
