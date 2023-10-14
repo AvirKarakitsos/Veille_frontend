@@ -79,7 +79,6 @@ function Home() {
 
     return (
         <>
-            <h2>Home Page</h2>
             <div className={styles["container--card"]}>
                 {!isLoading.authors 
                     && authors.map((author) => <Card key={author._id} author={author}/>) 

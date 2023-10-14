@@ -1,12 +1,15 @@
 
-//import styles from '../assets/styles/post.module.css'
+import styles from '../assets/styles/card.module.css'
 
-function Post({author}) {
+function Card({author}) {
     return (
-        <div>
-            <h3>{author.name}</h3>
+        <div className={styles["main-container"]}>
+            <div className={styles.container}> 
+                <img className={styles["container__image"]} src={author.image} alt={author.name}/>
+            </div>
+            <h2 className={styles["container__name"]}>{author.name}</h2>
         </div>
     )
 }
 
-export default Post
+export default Card
