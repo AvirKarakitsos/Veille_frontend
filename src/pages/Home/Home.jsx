@@ -84,7 +84,7 @@ function Home() {
                     && authors.map((author) => <Card key={author._id} author={author}/>) 
                 }
             </div>
-            <Link to="/create">Ajouter un post</Link>
+            <button><Link to="/create">Ajouter un post</Link></button>
             <div className={styles["container--search"]}>
                 <input 
                     className={styles["style--input"]} 

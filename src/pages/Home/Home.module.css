@@ -1,7 +1,7 @@
-
 .container--card {
+    height: 150px;
     width: 100%;
-    margin: 25px 0;
+    margin: 50px 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -10,6 +10,7 @@
 
 .container--search {
     width: 100%;
+    margin: 25px 0;
     display: flex;
     justify-content: center;
     align-items: center;
