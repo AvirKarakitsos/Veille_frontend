@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react"
 import Post from "../../components/Post"
+import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 
 function AuthorPage() {
     const param = useParams()
     const [posts,setPosts] = useState(null)
-    const [isLoading,setIsLoading] = useState({posts: ""})
+    const [isLoading,setIsLoading] = useState({posts: true})
 
     useEffect(()=>{ 
         fetch(`http://localhost:4000/api/authors/${param.id}/posts`)
@@ -22,7 +22,7 @@ function AuthorPage() {
     return (
         <>
         <h2>Author Page</h2>
-        {!isLoading
+        {!isLoading.posts
             && posts.map((post) => <Post key={post._id} post={post}/>)}
         </>
     )
