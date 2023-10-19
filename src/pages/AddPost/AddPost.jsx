@@ -3,7 +3,7 @@ import InputText from '../../components/InputText'
 import Select from '../../components/Select'
 
 import styles from './Form.module.css'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { useEffect } from 'react'
 
 function AddPost() {
@@ -17,6 +17,9 @@ function AddPost() {
     const [categories, setCategories] = useState(null)
     const [authors, setAuthors] = useState(null)
     const [isLoading, setIsLoading] = useState({categories: true, authors: true})
+
+    const formAdd = useRef()
+    const formMessage = useRef()
 
     useEffect(()=>{
         fetch("http://localhost:4000/api/categories")
@@ -52,7 +55,7 @@ function AddPost() {
     const handleAdd = function(e) {
         e.preventDefault()
         if((data.title === "") || (data.categoryId === "") || (data.authorId === "")) {
-            document.querySelector('.form-message').innerHTML = "Veuillez compléter tous les champs"
+            formMessage.current.innerHTML = "Veuillez compléter tous les champs"
         } else {
             fetch("http://localhost:4000/api/posts",{
                 method: "POST",
@@ -66,19 +69,17 @@ function AddPost() {
                         setData( values => ( {
                             ...values,
                             title: '',
-                            source: '',
                             link: '',
-                            authorId: '',
-                            categoryId: ''
+                            source: '',
+                            categoryId: '',
+                            authorId: ''
                         } ))
-                        document.querySelector("[name='source']").value = ""
-                        document.querySelector("[name='categoryId']").value = ""
-                        document.querySelector("[name='authorId']").value = ""
+                        formAdd.current.reset()
                     } 
                     return response.json()
                 })
                 .then(response => {
-                    document.querySelector('.form-message').innerHTML = ""
+                    formMessage.current.innerHTML = ""
                     console.log(response.message)
                 })
                 .catch(err => console.log(err.message))
@@ -88,7 +89,7 @@ function AddPost() {
     return(
         <>
             <h2>Formulaire</h2>
-            <form className={styles["form-container"]} onSubmit={handleAdd}>
+            <form ref={formAdd} className={styles["form-container"]} onSubmit={handleAdd}>
                 <label className={styles["label-style"]}>Titre
                     <InputText style={styles["input-style"]} string="title" value={data.title} onChange={onChange}/>
                 </label>
@@ -128,7 +129,7 @@ function AddPost() {
                     </Select>}
                 </label>
 
-                <p className='form-message'></p>
+                <p ref={formMessage}></p>
 
                 <button type="submit">Valider</button>
             </form>
