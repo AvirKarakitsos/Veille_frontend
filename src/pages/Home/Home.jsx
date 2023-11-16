@@ -4,14 +4,16 @@ import { Link } from "react-router-dom"
 import Post from "../../components/Post"
 import Card from "../../components/Card"
 import Select from '../../components/Select'
+import { useFetch } from '../../utils/useFetch'
 
 function Home() {
-    const [posts,setPosts] = useState(null)
-    const [categories,setCategories] = useState(null)
-    const [authors,setAuthors] = useState(null)
-    const [isLoading, setIsLoading] = useState({posts: true, categories: true, authors:true})
+    const [posts, setPosts] = useState(null)
+    const [isLoading, setIsLoading] = useState({posts: true})
     
-    const [data,setData] = useState({
+    const { table:categories, load: isLoadingCategories } = useFetch("http://localhost:4000/api/categories")
+    const { table:authors, load: isLoadingAuthors } = useFetch("http://localhost:4000/api/authors")
+    
+    const [data, setData] = useState({
         search: "",
         category: "all"
     })
@@ -33,30 +35,6 @@ function Home() {
                 .then((response) => setPosts(response))
         }
     },[data.category])
-
-    useEffect(()=>{ 
-        fetch("http://localhost:4000/api/categories")
-            .then((response) => response.json())
-            .then((response) => {
-                setCategories(response)
-                setIsLoading((values) => ({
-                    ...values,
-                    categories: false
-                }))
-            })
-    },[])
-
-    useEffect(()=>{ 
-        fetch("http://localhost:4000/api/authors")
-            .then((response) => response.json())
-            .then((response) => {
-                setAuthors(response)
-                setIsLoading((values) => ({
-                    ...values,
-                    authors: false
-                }))
-            })
-    },[])
 
     function onChange(e) {
         setData({
@@ -80,7 +58,7 @@ function Home() {
     return (
         <>
             <div className={styles["container--card"]}>
-                {!isLoading.authors 
+                {!isLoadingAuthors 
                     && authors.map((author) => <Card key={author._id} author={author}/>) 
                 }
             </div>
@@ -97,7 +75,7 @@ function Home() {
                 <label className={styles["style--label"]}> Catégorie
                     <Select style={styles["style--input"]} string="category" onChange={onChange}>
                         <option value="all">Tout</option>
-                        {!isLoading.categories && categories.map((category) => <option key={category._id} value={category._id}>{category.title}</option>)}
+                        {!isLoadingCategories && categories.map((category) => <option key={category._id} value={category._id}>{category.title}</option>)}
                     </Select>
                 </label>
             </div>

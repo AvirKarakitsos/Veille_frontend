@@ -1,26 +1,19 @@
-import { useState, useEffect } from "react"
+//import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
+import { useFetch } from "../../utils/useFetch"
 
 function PostPage() {
-    const [post,setPost] = useState(null)
-    const [isLoading, setIsLoading] = useState(true)
     const param = useParams()
-    
-    useEffect(()=> {
-        fetch(`http://localhost:4000/api/posts/${param.id}`)
-            .then((response) => response.json())
-            .then((response) => {
-                setPost(response)
-                setIsLoading(false)
-            })
-    },[param.id])
+    const { table, load } = useFetch(`http://localhost:4000/api/posts/${param.id}`)
+
 
     return(
         <>
-        {!isLoading && 
+        {!load && 
         <div>
-            <h2>{post.title}</h2>
-            <iframe src={post.link} height={500} width={1080}/>
+            <h2>{table.title}</h2>
+            <p>Lien: <a href={table.link}>{table.link}</a></p>
+            <iframe src={table.link} height={500} width={1080}/>
         </div>
         }
         </>

@@ -1,10 +1,16 @@
-import { Link } from 'react-router-dom'
 import InputText from '../../components/InputText'
 import Select from '../../components/Select'
-
 import styles from './Form.module.css'
 import { useRef, useState } from 'react'
-import { useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import { useFetch } from '../../utils/useFetch'
+import styled from 'styled-components'
+
+const FormContainer = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: center
+`
 
 function AddPost() {
     const [data, setData] = useState({
@@ -14,36 +20,11 @@ function AddPost() {
         categoryId: "",
         authorId: ""
     })
-    const [categories, setCategories] = useState(null)
-    const [authors, setAuthors] = useState(null)
-    const [isLoading, setIsLoading] = useState({categories: true, authors: true})
-
+    const { table:categories, load: isLoadingCategories } = useFetch("http://localhost:4000/api/categories")
+    const { table:authors, load: isLoadingAuthors } = useFetch("http://localhost:4000/api/authors")
+    
     const formAdd = useRef()
     const formMessage = useRef()
-
-    useEffect(()=>{
-        fetch("http://localhost:4000/api/categories")
-            .then((response) => response.json())
-            .then((response) => {
-                setCategories(response)
-                setIsLoading((values) => ({
-                    ...values,
-                    categories: false
-                }))
-            })
-    },[])
-
-    useEffect(()=>{
-        fetch("http://localhost:4000/api/authors")
-            .then((response) => response.json())
-            .then((response) => {
-                setAuthors(response)
-                setIsLoading((values) => ({
-                    ...values,
-                    authors: false
-                }))
-            })
-    },[])
 
     function onChange(e) {
         setData({
@@ -89,6 +70,7 @@ function AddPost() {
     return(
         <>
             <h2>Formulaire</h2>
+            <FormContainer>
             <form ref={formAdd} className={styles["form-container"]} onSubmit={handleAdd}>
                 <label className={styles["label-style"]}>Titre
                     <InputText style={styles["input-style"]} string="title" value={data.title} onChange={onChange}/>
@@ -108,7 +90,7 @@ function AddPost() {
                 </label>
 
                 <label className={styles["label-style"]}>Catégorie
-                    {!isLoading.categories && <Select style={styles["input-style"]} string="categoryId" onChange={onChange}>
+                    {!isLoadingCategories && <Select style={styles["input-style"]} string="categoryId" onChange={onChange}>
                         <option value=""></option>
                         {categories.map((category) => {
                         
@@ -119,7 +101,7 @@ function AddPost() {
                 </label>
 
                 <label className={styles["label-style"]}>Auteur
-                    {!isLoading.authors && <Select style={styles["input-style"]} string="authorId" onChange={onChange}>
+                    {!isLoadingAuthors && <Select style={styles["input-style"]} string="authorId" onChange={onChange}>
                         <option value=""></option>
                         {authors.map((author) => {
 
@@ -133,6 +115,7 @@ function AddPost() {
 
                 <button type="submit">Valider</button>
             </form>
+            </FormContainer>
             <Link to="/">{"Retour à la page d'accueil"}</Link>
         </>
     )
