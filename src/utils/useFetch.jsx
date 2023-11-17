@@ -6,15 +6,15 @@ export function useFetch(url) {
 
     useEffect(() => {
         if (!url) return
-            async function fetchData() {
-                const response = await fetch(url)
-                const res = await response.json()
+        async function fetchData() {
+            const response = await fetch(url)
+            const res = await response.json()
 
-                setTable(res)
-                setLoad(false)
-            }
-            setLoad(true)
-            fetchData()
+            setTable(res)
+            setLoad(false)
+        }
+        setLoad(true)
+        fetchData()
 
     }, [url])
 
