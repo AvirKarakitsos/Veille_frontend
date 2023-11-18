@@ -61,50 +61,52 @@ function AddPost() {
     }
 
     return(
-        <form ref={formAdd} className={styles["form-container"]} onSubmit={handleAdd}>
-            <legend>Ajouter un post</legend>
-            <label className={styles["label-style"]}>Titre
-                <InputText style={styles["input-style"]} string="title" value={data.title} onChange={onChange}/>
-            </label>
+        <form ref={formAdd} onSubmit={handleAdd}>
+            <fieldset className={styles["form-container"]} >
+                <legend>Ajouter un post</legend>
+                <label className={styles["label-style"]}>Titre
+                    <InputText style={styles["input-style"]} string="title" value={data.title} onChange={onChange}/>
+                </label>
 
-            <label className={styles["label-style"]}>Source
-                <Select style={styles["input-style"]} string="source" onChange={onChange}>
-                    <option value=""></option>
-                    <option value="twitter">Twitter</option>
-                    <option value="youtube">Youtube</option>
-                    <option value="article">Article</option>
-                </Select>
-            </label>
+                <label className={styles["label-style"]}>Source
+                    <Select style={styles["input-style"]} string="source" onChange={onChange}>
+                        <option value=""></option>
+                        <option value="twitter">Twitter</option>
+                        <option value="youtube">Youtube</option>
+                        <option value="article">Article</option>
+                    </Select>
+                </label>
 
-            <label className={styles["label-style"]}>Lien
-                <InputText style={styles["input-style"]} string="link" value={data.link} onChange={onChange}/>
-            </label>
+                <label className={styles["label-style"]}>Lien
+                    <InputText style={styles["input-style"]} string="link" value={data.link} onChange={onChange}/>
+                </label>
 
-            <label className={styles["label-style"]}>Catégorie
-                {!isLoadingCategories && <Select style={styles["input-style"]} string="categoryId" onChange={onChange}>
-                    <option value=""></option>
-                    {categories.map((category) => {
-                    
-                        return (<option key={category._id} value={category._id}>{category.title}</option>)
+                <label className={styles["label-style"]}>Catégorie
+                    {!isLoadingCategories && <Select style={styles["input-style"]} string="categoryId" onChange={onChange}>
+                        <option value=""></option>
+                        {categories.map((category) => {
+                        
+                            return (<option key={category._id} value={category._id}>{category.title}</option>)
 
-                    })}
-                </Select>}
-            </label>
+                        })}
+                    </Select>}
+                </label>
 
-            <label className={styles["label-style"]}>Auteur
-                {!isLoadingAuthors && <Select style={styles["input-style"]} string="authorId" onChange={onChange}>
-                    <option value=""></option>
-                    {authors.map((author) => {
+                <label className={styles["label-style"]}>Auteur
+                    {!isLoadingAuthors && <Select style={styles["input-style"]} string="authorId" onChange={onChange}>
+                        <option value=""></option>
+                        {authors.map((author) => {
 
-                        return (<option key={author._id} value={author._id}>{author.name}</option>)
+                            return (<option key={author._id} value={author._id}>{author.name}</option>)
 
-                    })}
-                </Select>}
-            </label>
+                        })}
+                    </Select>}
+                </label>
 
-            <p ref={formMessage}></p>
+                <p ref={formMessage}></p>
 
-            <button type="submit">Valider</button>
+                <button type="submit">Valider</button>
+            </fieldset>
         </form>
     )
 }

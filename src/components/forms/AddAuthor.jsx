@@ -1,26 +1,15 @@
-import { useState } from "react";
-import InputText from "../InputText";
-import styles from "./Form.module.css"
-
+import styles from './Form.module.css'
 
 function AddAuthor() {
-    const [data, setData] = useState({
-        name: "",
-        language: ""
-    })
-
-    function onChange(e) {
-        setData({
-            ...data,
-            [e.target.name]: e.target.value
-        })
-    }
 
     return(
         <form>
-            <legend>Ajouter un Dévelopeur</legend>
-            <InputText style={styles["input-style"]} string="name" value={data.name} onChange={onChange} />
-            <InputText style={styles["input-style"]} string="language" value={data.language} onChange={onChange} />
+            <fieldset className={styles["form-container"]}>
+                <legend>Ajouter un Dévelopeur</legend>
+                <input type="text" className={styles["input-style"]}/>
+                <input type="text" className={styles["input-style"]}/>
+                <button type="submit">Valider</button>
+            </fieldset>
         </form>
     )
 }
