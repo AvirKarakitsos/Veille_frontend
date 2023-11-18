@@ -4,7 +4,7 @@ import App from './App.jsx'
 import './index.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import Home from './pages/Home/Home.jsx'
-import AddPost from './pages/AddPost/AddPost.jsx'
+import AddElement from './pages/AddElement/AddElement.jsx'
 import PostPage from './pages/PostPage/PostPage.jsx'
 import AuthorPage from './pages/AuthorPage/AuthorPage.jsx'
 
@@ -16,7 +16,7 @@ const router = createBrowserRouter([
       {path: '/', element: <Home/>},
       {path: '/author/:id', element: <AuthorPage/>},
       {path: '/post/:id', element: <PostPage/>},
-      {path: '/create', element: <AddPost/>},
+      {path: '/create', element: <AddElement/>},
     ]
   }
 ])
