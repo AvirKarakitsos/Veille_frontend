@@ -4,6 +4,14 @@ import AddAuthor from '../../components/forms/AddAuthor'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
+const ListContainer = styled.ul`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    column-gap:50px;
+    list-style-type: none;
+`
+
 const FormContainer = styled.div`
     width: 100%;
     display: flex;
@@ -23,10 +31,10 @@ function AddElement() {
     return(
         <>
             <h2>Formulaire</h2>
-            <ul>
+            <ListContainer>
                 <li onClick={() => setSelect("POST")}>Ajouter un post</li>
                 <li onClick={() => setSelect("AUTHOR")}>Ajouter un dev</li>
-            </ul>
+            </ListContainer>
             <FormContainer>
                 <CurrentView/>
             </FormContainer>
