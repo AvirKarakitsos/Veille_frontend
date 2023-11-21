@@ -14,7 +14,10 @@ export function useFetch(url) {
             setLoad(false)
         }
         setLoad(true)
-        fetchData()
+        
+        setTimeout(() => {
+            fetchData()
+        },2000)
 
     }, [url])
 
