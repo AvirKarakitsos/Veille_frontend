@@ -40,30 +40,33 @@ function Home() {
 
     return (
         <>
-            <div className={styles["container--card"]}>
+            <aside className={styles["container--card"]}>
                 {!isLoadingAuthors 
                     && authors.map((author) => <Card key={author._id} author={author}/>) 
                 }
-            </div>
-            <button><Link to="/create">Ajouter un post</Link></button>
-            <div className={styles["container--search"]}>
-                <input 
-                    className={styles["style--input"]} 
-                    name='search' type="text" 
-                    onChange={onChange} 
-                    value={data.search} 
-                    onInput={onChange}
-                    placeholder='Rechercher'
-                    autoComplete='off'/>
-                <label className={styles["style--label"]}> Catégorie
-                    <Select style={styles["style--input"]} string="category" onChange={onChange}>
-                        <option value="all">Tout</option>
-                        {!isLoadingCategories && categories.map((category) => <option key={category._id} value={category._id}>{category.title}</option>)}
-                    </Select>
-                </label>
-            </div>
-            <div className={styles["container--post"]}>
-                {!isLoadingPosts && posts.map((post) => <Post key={post._id} post={post}/>)}
+            </aside>
+            <div className={styles.section}>
+                <h1 className={styles["main-title"]}>Veille</h1>
+                <button><Link to="/create">Ajouter un post</Link></button>
+                <form className={styles["container--search"]}>
+                    <input 
+                        className={styles["style--input"]} 
+                        name='search' type="text" 
+                        onChange={onChange} 
+                        value={data.search} 
+                        onInput={onChange}
+                        placeholder='Rechercher'
+                        autoComplete='off'/>
+                    <label className={styles["style--label"]}> Catégorie
+                        <Select style={styles["style--input"]} string="category" onChange={onChange}>
+                            <option value="all">Tout</option>
+                            {!isLoadingCategories && categories.map((category) => <option key={category._id} value={category._id}>{category.title}</option>)}
+                        </Select>
+                    </label>
+                </form>
+                <div className={styles["container--post"]}>
+                    {!isLoadingPosts && posts.map((post) => <Post key={post._id} post={post}/>)}
+                </div>
             </div>
         </>
     )

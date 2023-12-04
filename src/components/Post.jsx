@@ -3,7 +3,7 @@ import styles from '../assets/styles/post.module.css'
 import styled from 'styled-components'
 
 const PostContainer = styled.div`
-    width: 450px;
+    width: 85%;
     padding: 0px 15px;
     margin: 15px 0;
     display: flex;

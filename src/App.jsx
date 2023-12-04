@@ -4,10 +4,13 @@ import './App.css'
 function App() {
 
   return (
-    <>
-      <h1>Titre h1</h1>
-      <Outlet/>
-    </>
+    <div className='main-container'>
+      <div className='container'>
+        <Outlet/>
+      </div>
+      <div className="cercle1"></div>
+      <div className="cercle2"></div>
+    </div>
   )
 }
 

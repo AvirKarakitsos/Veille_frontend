@@ -1,8 +1,14 @@
 .container {
-    height: 120px;
-    margin:0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
     transition: transform 250ms;
-    border: 1px solid #000;
+}
+
+.main-container {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
 }
 
 .container:hover {
@@ -10,13 +16,13 @@
 }
 
 .container__image {
-    height: 120px;
-    width: 120px;
-    border-radius: 5px;
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
 }
 
 .container__name {
     margin: 0;
     font-size: 15px;
-    color: #fff;
+    color: #000;
 }
