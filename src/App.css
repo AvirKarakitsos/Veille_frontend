@@ -12,10 +12,9 @@
   height: 80vh;
   width: 55%;
   min-width: 700px;
-  padding:  0 20px;
   display: flex;
   border-radius: 15px;
-  background: linear-gradient(to left bottom, rgb(250,250,250,.5), rgb(250,250,250,.8));
+  background: linear-gradient(to left bottom, rgba(250,250,250,.5), rgba(250,250,250,.8));
   backdrop-filter: blur(10px);
   z-index: 20;
 }
@@ -25,7 +24,7 @@
   width: 180px;
   position: absolute;
   border-radius: 50%;
-  background: linear-gradient(to left bottom, rgb(250,250,250,.3), rgb(250,250,250,.8));
+  background: linear-gradient(to left bottom, rgba(250,250,250,.3), rgba(250,250,250,.8));
   z-index: 10;
 }
 

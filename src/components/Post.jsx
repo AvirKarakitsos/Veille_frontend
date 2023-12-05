@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import styles from '../assets/styles/post.module.css'
 import styled from 'styled-components'
 
-const PostContainer = styled.div`
+const PostContainer = styled.article`
     width: 85%;
     padding: 0px 15px;
     margin: 15px 0;
@@ -11,6 +11,8 @@ const PostContainer = styled.div`
     align-items: center;
     border: 1px solid #000;
     border-radius: 10px;
+    background: linear-gradient(to left bottom, rgba(250,250,250,1), rgba(250,250,250,.8));
+    box-shadow: 6px 6px 20px rgba(122,122,122,0.2)
 `
 
 function Post({post}) {

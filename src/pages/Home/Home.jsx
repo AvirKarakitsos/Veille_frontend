@@ -57,12 +57,11 @@ function Home() {
                         onInput={onChange}
                         placeholder='Rechercher'
                         autoComplete='off'/>
-                    <label className={styles["style--label"]}> Catégorie
-                        <Select style={styles["style--input"]} string="category" onChange={onChange}>
-                            <option value="all">Tout</option>
-                            {!isLoadingCategories && categories.map((category) => <option key={category._id} value={category._id}>{category.title}</option>)}
-                        </Select>
-                    </label>
+                
+                    <Select style={styles["style--input"]} string="category" onChange={onChange}>
+                        <option value="all">Tout</option>
+                        {!isLoadingCategories && categories.map((category) => <option key={category._id} value={category._id}>{category.title}</option>)}
+                    </Select>
                 </form>
                 <div className={styles["container--post"]}>
                     {!isLoadingPosts && posts.map((post) => <Post key={post._id} post={post}/>)}
