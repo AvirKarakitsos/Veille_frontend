@@ -39,3 +39,8 @@ a {
 a:hover {
   color: var(--purple2);
 }
+
+ul {
+  margin: 0;
+  padding: 0;
+}

@@ -40,12 +40,12 @@ function Home() {
 
     return (
         <>
-            <aside className={styles["container--card"]}>
+            <aside className='container--left'>
                 {!isLoadingAuthors 
                     && authors.map((author) => <Card key={author._id} author={author}/>) 
                 }
             </aside>
-            <div className={styles.section}>
+            <div className='container--right'>
                 <h1 className={styles["main-title"]}>Veille</h1>
                 <button><Link to="/create">Ajouter un post</Link></button>
                 <form className={styles["container--search"]}>

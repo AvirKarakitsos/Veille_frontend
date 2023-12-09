@@ -7,16 +7,17 @@ import styled from 'styled-components'
 const ListContainer = styled.ul`
     width: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    column-gap:50px;
+    row-gap: 25px;
     list-style-type: none;
+    cursor: default;
 `
 
 const FormContainer = styled.div`
     width: 100%;
     display: flex;
     justify-content: center;
-    padding: 50px;
 `
 
 const Display = {
@@ -30,15 +31,19 @@ function AddElement() {
 
     return(
         <>
+        <section className='container--left'>
             <h2>Formulaire</h2>
             <ListContainer>
+                <li><Link to="/">{"Accueil"}</Link></li>
                 <li onClick={() => setSelect("POST")}>Ajouter un post</li>
                 <li onClick={() => setSelect("AUTHOR")}>Ajouter un dev</li>
             </ListContainer>
+        </section>
+        <section className='container--right'>
             <FormContainer>
                 <CurrentView/>
             </FormContainer>
-            <Link to="/">{"Retour à la page d'accueil"}</Link>
+        </section>
         </>
     )
 }

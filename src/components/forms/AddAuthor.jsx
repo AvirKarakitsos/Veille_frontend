@@ -38,7 +38,7 @@ function AddAuthor() {
                     <option value="french">Français</option>
                     <option value="english">Anglais</option>
                 </select>
-                <input {...register("image", {required: true})} type='file'/>
+                <input {...register("image", {required: true})} type='file' className={styles["input-style"]}/>
                 <button type="submit">Valider</button>
             </fieldset>
         </form>

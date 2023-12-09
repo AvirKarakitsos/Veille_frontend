@@ -1,24 +1,3 @@
-
-.container--card {
-    flex: 1;
-    max-width: 300px;
-    padding: 0 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    row-gap: 25px;
-    border-radius: 15px;
-    background: linear-gradient(to left bottom, rgba(250,250,250,.5), rgba(250,250,250,.8));
-}
-
-.section {
-    flex: 3;
-    padding: 0 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
 button {
     height: 50px;
     width: 100px;
