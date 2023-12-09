@@ -8,7 +8,7 @@
 .main-container {
     display: flex;
     align-items: center;
-    column-gap: 10px;
+    column-gap: 15px;
 }
 
 .container:hover {
@@ -16,13 +16,14 @@
 }
 
 .container__image {
-    height: 60px;
-    width: 60px;
+    height: 45px;
+    width: 45px;
     border-radius: 50%;
 }
 
 .container__name {
     margin: 0;
     font-size: 15px;
+    font-weight: 500;
     color: #000;
 }

@@ -9,7 +9,6 @@ const PostContainer = styled.article`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border: 1px solid #000;
     border-radius: 10px;
     background: linear-gradient(to left bottom, rgba(250,250,250,1), rgba(250,250,250,.8));
     box-shadow: 6px 6px 20px rgba(122,122,122,0.2)
