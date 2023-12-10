@@ -61,6 +61,15 @@
   justify-content: flex-start;
 }
 
+/* Loading Page*/
+.loading-page {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 22px;
+}
+
 /* Error Page*/
 .error-container {
   display: flex;

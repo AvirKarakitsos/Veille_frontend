@@ -14,7 +14,7 @@ function AuthorPage() {
     const { table, load } = useFetch(`http://localhost:4000/api/authors/${param.id}/posts`)
 
     if(load || isLoadingAuthors) {
-        return <div className={styles.loading}>... Loading</div>
+        return <div className="loading-page">... Loading</div>
     }
 
     return (
