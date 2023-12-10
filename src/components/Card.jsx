@@ -5,7 +5,9 @@ function Card({author}) {
 
     return (
         <figure className={styles.container}> 
-            <Link className={styles["main-container"]} to={`/author/${author._id}`}> 
+            <Link 
+                className={styles["main-container"]} 
+                to={`/author/${author._id}`} state={author.name}> 
                 <img 
                     className={styles["container__image"]} 
                     src={author.image} alt={author.name}

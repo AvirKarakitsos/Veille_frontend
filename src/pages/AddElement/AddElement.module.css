@@ -1,0 +1,12 @@
+.list {
+    color: #000;
+    cursor: pointer;
+}
+
+a {
+    color: #000;
+}
+
+.list:hover {
+    color: var(--purple2)
+}

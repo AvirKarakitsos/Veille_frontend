@@ -6,6 +6,11 @@
     align-items: center;
 }
 
+legend {
+    padding: 0 10px;
+    font-weight: 600;
+}
+
 .label-style {
     width: 100%;
     display: flex;

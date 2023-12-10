@@ -3,6 +3,7 @@ import AddPost from '../../components/forms/AddPost'
 import AddAuthor from '../../components/forms/AddAuthor'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import styles from "./AddElement.module.css"
 
 const ListContainer = styled.ul`
     width: 100%;
@@ -11,7 +12,6 @@ const ListContainer = styled.ul`
     justify-content: center;
     row-gap: 25px;
     list-style-type: none;
-    cursor: default;
 `
 
 const FormContainer = styled.div`
@@ -34,9 +34,9 @@ function AddElement() {
         <section className='container--left'>
             <h2>Formulaire</h2>
             <ListContainer>
-                <li><Link to="/">{"Accueil"}</Link></li>
-                <li onClick={() => setSelect("POST")}>Ajouter un post</li>
-                <li onClick={() => setSelect("AUTHOR")}>Ajouter un dev</li>
+                <li className={styles.list}><Link to="/">{"Accueil"}</Link></li>
+                <li className={styles.list} onClick={() => setSelect("POST")}>Ajouter un post</li>
+                <li className={styles.list} onClick={() => setSelect("AUTHOR")}>Ajouter un dev</li>
             </ListContainer>
         </section>
         <section className='container--right'>
