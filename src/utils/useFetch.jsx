@@ -6,13 +6,13 @@ export function useFetch(url) {
     const [load, setLoad] = useState(true)
     
     useEffect(() => {
-        const abortController = new AbortController()
-        const abort = () => abortController.abort()
-        const {signal} = abortController.signal
+        const controller = new AbortController()
+       // const abort = () => controller.abort()
+        //const {signal} = controller.signal
         
         if (!url) return
         async function fetchData() {
-            const response = await fetch(url, {signal})
+            const response = await fetch(url, {signal:controller.signal})
             const res = await response.json()
 
             setTable(res)
@@ -26,7 +26,7 @@ export function useFetch(url) {
 
         return () => {
             clearTimeout(time)
-            abort() 
+            controller.abort()
         }
 
     }, [url])
