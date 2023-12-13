@@ -20,12 +20,13 @@ export function useFetch(url) {
         }
         setLoad(true)
         
-        setTimeout(() => {
+        let time = setTimeout(() => {
             fetchData()
         },2000)
 
         return () => {
-            abort()    
+            clearTimeout(time)
+            abort() 
         }
 
     }, [url])
