@@ -1,5 +1,5 @@
 import styles from './Home.module.css'
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { Link } from "react-router-dom"
 import Post from "../../components/Post"
 import Card from "../../components/Card"
@@ -25,6 +25,23 @@ function Home() {
         }
     },[data.category])
 
+    const scrollRef = useRef(0)
+    const scrollRef2 = useRef(null)
+    const [display,setDisplay] = useState(0)
+    const [display2,setDisplay2] = useState(0)
+
+    useEffect(()=>{
+        scrollRef.current.addEventListener("scroll",()=>{
+            setDisplay(scrollRef.current.scrollTop)
+            setDisplay2(scrollRef.current.scrollHeight)
+            if(scrollRef.current.scrollHeight - scrollRef.current.scrollTop >365) {
+                scrollRef2.current.classList.add('active')
+            } else {
+                scrollRef2.current.classList.remove('active')
+            }
+        })
+    },[])
+
     function onChange(e) {
         setData({
             ...data,
@@ -45,7 +62,7 @@ function Home() {
                     && authors.map((author) => <Card key={author._id} author={author}/>) 
                 }
             </aside>
-            <div className='container--right'>
+            <div ref={scrollRef2} className='container--right'>
                 <h1 className={styles["main-title"]}>Veille</h1>
                 <button><Link to="/create">Ajouter un post</Link></button>
                 <form className={styles["container--search"]}>
@@ -63,9 +80,11 @@ function Home() {
                         {!isLoadingCategories && categories.map((category) => <option key={category._id} value={category._id}>{category.title}</option>)}
                     </Select>
                 </form>
-                <div className={styles["container--post"]}>
+                {display+"/"+display2}
+                <div ref={scrollRef} className={styles["container--post"]}>
                     {!isLoadingPosts && posts.map((post) => <Post key={post._id} post={post}/>)}
                 </div>
+                <div className='blur-div'></div>
             </div>
         </>
     )

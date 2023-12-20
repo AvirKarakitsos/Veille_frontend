@@ -55,11 +55,26 @@
 .container--right {
   flex: 3;
   padding: 0 20px;
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
 }
+
+.blur-div {
+  height: 3px;
+  width: 84%;
+  position: absolute;
+  bottom: 0;
+  /* border-radius: 15px; */
+  background: linear-gradient(to left bottom, rgba(250,250,250,.5), rgba(250,250,250,.8));
+  backdrop-filter: blur(5px);
+  z-index: 30;
+}
+/* .active {
+  border-bottom: 5px solid rgba(250,250,250,.8);
+} */
 
 /* Loading Page*/
 .loading-page {
