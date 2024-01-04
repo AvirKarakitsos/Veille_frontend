@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 export function useFetch(url) {
     
     const [table, setTable] = useState({})
+    const [numberPage, setNumberPage] = useState(0)
     const [load, setLoad] = useState(true)
     
     useEffect(() => {
@@ -14,14 +15,19 @@ export function useFetch(url) {
         async function fetchData() {
             const response = await fetch(url, {signal:controller.signal})
             const res = await response.json()
-
-            setTable(res)
+            console.log(res)
+            if(url.includes("posts")) {
+                setTable(res[0])
+                setNumberPage(res[1])
+            } 
+            else setTable(res)
             setLoad(false)
         }
         setLoad(true)
         
         let time = setTimeout(() => {
             fetchData()
+            
         },2000)
 
         return () => {
@@ -31,5 +37,5 @@ export function useFetch(url) {
 
     }, [url])
 
-    return { load, table }
+    return { load, table, numberPage }
 }
