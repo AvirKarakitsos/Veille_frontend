@@ -13,9 +13,9 @@ function Home() {
         url: "http://localhost:4000/api/posts"
     })
 
-    const { table:categories, load: isLoadingCategories } = useFetch("http://localhost:4000/api/categories")
-    const { table:authors, load: isLoadingAuthors } = useFetch("http://localhost:4000/api/authors")
-    let { table:posts, load: isLoadingPosts, numberPage } = useFetch(data.url)
+    const { table: categories, load: isLoadingCategories } = useFetch("http://localhost:4000/api/categories")
+    const { table: authors, load: isLoadingAuthors } = useFetch("http://localhost:4000/api/authors")
+    let { table: posts, load: isLoadingPosts, numberPage } = useFetch(data.url)
 
     useEffect(()=>{
         if( data.category === "all") {
@@ -38,6 +38,17 @@ function Home() {
         } else if(e.target.value.length === 0) {
             setData((values) => ({...values, url:"http://localhost:4000/api/posts"}))
         }
+    }
+
+    function changePage(e) {
+        if(e.target.dataset.id) {
+            let newUrl = new URL(data.url)
+            if(!newUrl.searchParams.has("page")) newUrl.searchParams.append("page",e.target.dataset.id)
+            else newUrl.searchParams.set("page",e.target.dataset.id)
+
+            setData((values) => ({...values, url: newUrl}))
+        
+        } 
     }
 
     return (
@@ -69,8 +80,8 @@ function Home() {
                 <div className={styles["container--post"]}>
                     {!isLoadingPosts && posts.map((post) => <Post key={post._id} post={post}/>)}
                 </div>
-                <div className='pagination'>
-                {Array.from(Array(numberPage + 1).keys()).slice(1).map((page) => <span key={page}>{page}</span>)}
+                <div className='pagination' onClick={changePage}>
+                {Array.from(Array(numberPage + 1).keys()).slice(1).map((page) => <span key={page} data-id={page} className='page'>{page}</span>)}
                 </div>
             </div>
         </>

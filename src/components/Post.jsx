@@ -15,6 +15,7 @@ const PostContainer = styled.article`
 `
 
 function Post({post}) {
+   
     return (
         <PostContainer>
                 <div className={styles["container__sub"]}>

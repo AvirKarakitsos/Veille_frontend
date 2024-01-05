@@ -15,8 +15,9 @@ export function useFetch(url) {
         async function fetchData() {
             const response = await fetch(url, {signal:controller.signal})
             const res = await response.json()
-            console.log(res)
-            if(url.includes("posts")) {
+            let testUrl =  url.href ?? url
+
+            if((testUrl === "http://localhost:4000/api/posts") || testUrl.includes("posts?page")) {
                 setTable(res[0])
                 setNumberPage(res[1])
             } 
@@ -28,7 +29,7 @@ export function useFetch(url) {
         let time = setTimeout(() => {
             fetchData()
             
-        },2000)
+        },1000)
 
         return () => {
             clearTimeout(time)
