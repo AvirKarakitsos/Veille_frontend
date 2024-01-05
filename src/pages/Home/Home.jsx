@@ -47,7 +47,10 @@ function Home() {
             else newUrl.searchParams.set("page",e.target.dataset.id)
 
             setData((values) => ({...values, url: newUrl}))
-        
+
+            //Change color of page number
+            document.querySelector(".active").classList.remove("active")
+            e.target.classList.add("active")
         } 
     }
 
@@ -81,7 +84,12 @@ function Home() {
                     {!isLoadingPosts && posts.map((post) => <Post key={post._id} post={post}/>)}
                 </div>
                 <div className='pagination' onClick={changePage}>
-                {Array.from(Array(numberPage + 1).keys()).slice(1).map((page) => <span key={page} data-id={page} className='page'>{page}</span>)}
+                {numberPage > 1 
+                    && Array.from(Array(numberPage + 1).keys()).slice(1).map((page) => {
+                        if(page === 1) return <span key={page} data-id={page} className='page active'>{page}</span>
+                        else return <span key={page} data-id={page} className='page'>{page}</span>
+                    })
+                }
                 </div>
             </div>
         </>
