@@ -3,7 +3,7 @@ import { useLocation, useParams } from "react-router-dom"
 import { useFetch } from "../../utils/useFetch"
 import styles from "./AuthorPage.module.css"
 import Aside from "../../components/Aside"
-import { validatePath } from "../../utils/validatePath"
+import { validatePathName } from "../../utils/validatePath"
 function AuthorPage() {
 
     const location = useLocation()
@@ -13,7 +13,7 @@ function AuthorPage() {
     
     if(load || loadAuthors) {
         return <div className="loading-page">... Loading</div>
-    } else if(validatePath(authors, param.name)) {
+    } else if(validatePathName(authors, param.name)) {
         return (
             <>
             <Aside/>
@@ -28,7 +28,6 @@ function AuthorPage() {
     } else {
         return <div className="loading-page">404</div>
     }
-
-    } 
+} 
 
 export default AuthorPage
