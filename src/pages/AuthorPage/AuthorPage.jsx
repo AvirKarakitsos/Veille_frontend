@@ -7,10 +7,8 @@ import Aside from "../../components/Aside"
 
 function AuthorPage() {
     const location = useLocation()
-    const name = location.state
-
     const param = useParams()
-    const { table, load } = useFetch(`http://localhost:4000/api/authors/${param.id}/posts`)
+    const { table, load } = useFetch(`http://localhost:4000/api/authors/${location.state}/posts`)
 
     if(load) {
         return <div className="loading-page">... Loading</div>
@@ -20,7 +18,7 @@ function AuthorPage() {
         <>
         <Aside/>
         <main className="container--right">
-            <h2>{ name }</h2>
+            <h2>{ param.name }</h2>
             <section className={styles["container--post"]}>
                 {table.map((post) => <Post key={post._id} post={post}/>)}
             </section>

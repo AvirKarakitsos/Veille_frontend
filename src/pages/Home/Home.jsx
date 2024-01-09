@@ -1,10 +1,10 @@
 import styles from './Home.module.css'
-import { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
 import Post from "../../components/Post"
 import Aside from "../../components/Aside"
 import Select from '../../components/Select'
+import { Link } from "react-router-dom"
 import { useFetch } from '../../utils/useFetch'
+import { useEffect, useState } from "react"
 
 function Home() {
     const [data, setData] = useState({
