@@ -4,6 +4,7 @@ import { useFetch } from "../utils/useFetch"
 
 function Aside() {
     const { table: authors, load: isLoadingAuthors } = useFetch("http://localhost:4000/api/authors")
+
     return(
         <aside className='container--left'>
         {!isLoadingAuthors 
