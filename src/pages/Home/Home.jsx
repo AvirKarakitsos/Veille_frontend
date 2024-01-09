@@ -2,7 +2,7 @@ import styles from './Home.module.css'
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import Post from "../../components/Post"
-import Card from "../../components/Card"
+import Aside from "../../components/Aside"
 import Select from '../../components/Select'
 import { useFetch } from '../../utils/useFetch'
 
@@ -14,7 +14,6 @@ function Home() {
     })
 
     const { table: categories, load: isLoadingCategories } = useFetch("http://localhost:4000/api/categories")
-    const { table: authors, load: isLoadingAuthors } = useFetch("http://localhost:4000/api/authors")
     let { table: posts, load: isLoadingPosts, numberPage } = useFetch(data.url)
 
     useEffect(()=>{
@@ -56,12 +55,8 @@ function Home() {
 
     return (
         <>
-            <aside className='container--left'>
-                {!isLoadingAuthors 
-                    && authors.map((author) => <Card key={author._id} author={author}/>) 
-                }
-            </aside>
-            <div className='container--right'>
+            <Aside/>
+            <main className='container--right'>
                 <h1 className={styles["main-title"]}>Veille</h1>
                 <button><Link to="/create">Ajouter un post</Link></button>
                 <form className={styles["container--search"]}>
@@ -91,7 +86,7 @@ function Home() {
                     })
                 }
                 </div>
-            </div>
+            </main>
         </>
     )
 }
