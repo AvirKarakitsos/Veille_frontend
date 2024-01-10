@@ -1,5 +1,4 @@
 function Error() {
-
     return (
       <div className='main-container'>
         <div className="error-container">

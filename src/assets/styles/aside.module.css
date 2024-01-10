@@ -1,0 +1,29 @@
+.scrollContainer {
+    height: 200px;
+    padding: 25px 0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    row-gap: 25px;
+    overflow-y: scroll;
+}
+
+.scrollContainer::-webkit-scrollbar {
+    display: none;
+}
+
+.icone {
+    position: sticky;
+    bottom: -10px;
+    display: flex;
+    justify-content: center;
+}
+
+.icone::after {
+    content: "";
+    height: 25px;
+}
+
+.icone i{
+    font-size: 25px;
+}

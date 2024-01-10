@@ -1,11 +1,12 @@
+import styles from "./AuthorPage.module.css"
 import Post from "../../components/Post"
+import Aside from "../../components/Aside"
 import { useLocation, useParams } from "react-router-dom"
 import { useFetch } from "../../utils/useFetch"
-import styles from "./AuthorPage.module.css"
-import Aside from "../../components/Aside"
 import { validatePathName } from "../../utils/validatePath"
-function AuthorPage() {
 
+
+function AuthorPage() {
     const location = useLocation()
     const param = useParams()
     const { table: authors, load: loadAuthors } = useFetch(`http://localhost:4000/api/authors`)
