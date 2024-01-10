@@ -4,6 +4,10 @@
     column-gap: 15px;
 }
 
+.container__link:hover {
+    color: var(--purple2)
+}
+
 .container__sub__profil {
     border-radius: 50%;
 }

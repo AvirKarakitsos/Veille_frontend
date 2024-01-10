@@ -48,8 +48,12 @@ function Home() {
             setData((values) => ({...values, url: newUrl}))
 
             //Change color of page number
+            document.querySelectorAll(".numberPage").forEach((number) => {
+                number.classList.add("inactive")
+            })
             document.querySelector(".active").classList.remove("active")
             e.target.classList.add("active")
+            e.target.classList.remove("inactive")
         } 
     }
 
@@ -78,11 +82,11 @@ function Home() {
                 <div className={styles["container--post"]}>
                     {!isLoadingPosts && posts.map((post) => <Post key={post._id} post={post}/>)}
                 </div>
-                <div className='pagination' onClick={changePage}>
+                <div className={styles.pagination} onClick={changePage}>
                 {numberPage > 1 
                     && Array.from(Array(numberPage + 1).keys()).slice(1).map((page) => {
-                        if(page === 1) return <span key={page} data-id={page} className='page active'>{page}</span>
-                        else return <span key={page} data-id={page} className='page'>{page}</span>
+                        if(page === 1) return <span key={page} data-id={page} className={styles.page+" numberPage active"}>{page}</span>
+                        else return <span key={page} data-id={page} className={styles.page+" numberPage inactive"}>{page}</span>
                     })
                 }
                 </div>

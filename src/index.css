@@ -18,12 +18,9 @@
   --blue2: #1434A4;
 }
 
-body {
+body, figure, ul {
   margin: 0;
-}
-
-figure {
-  margin: 0;
+  padding: 0;
 }
 
 img {
@@ -34,13 +31,4 @@ a {
   font-weight: 500;
   color: var(--purple1) ;
   text-decoration: inherit;
-}
-
-a:hover {
-  color: var(--purple2);
-}
-
-ul {
-  margin: 0;
-  padding: 0;
 }

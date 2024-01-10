@@ -1,6 +1,6 @@
 .scrollContainer {
     height: 200px;
-    padding: 25px 0;
+    padding: 25px 10px;
     position: relative;
     display: flex;
     flex-direction: column;

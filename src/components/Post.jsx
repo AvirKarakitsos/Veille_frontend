@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom'
 import styles from '../assets/styles/post.module.css'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 const PostContainer = styled.article`
     width: 85%;
