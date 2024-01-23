@@ -17,8 +17,7 @@ export function useFetch(url) {
             const res = await response.json()
             let testUrl =  url.href ?? url
 
-            if((testUrl === "http://localhost:4000/api/posts") || testUrl.includes("posts?page")) {
-                console.log(res)
+            if((testUrl === "http://localhost:4000/api/posts") || testUrl.includes("posts?")) {
                 setTable(res.data)
                 setNumberPage(res.numberPages)
             } 

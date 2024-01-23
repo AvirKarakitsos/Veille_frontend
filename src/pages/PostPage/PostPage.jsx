@@ -13,12 +13,12 @@ function PostPage() {
     } else if(validatePathId(posts, param.id)) {
         return (
             <div className={styles["container-post"]}>
-            <h2>{table.title}</h2>
-            <div className={styles.section}>
-                <p>Lien: <a href={table.link}>{table.link}</a></p>
-                <iframe src={table.link} />
+                <h2>{table.title}</h2>
+                <div className={styles.section}>
+                    <p>Lien: <a href={table.link}>{table.link}</a></p>
+                    <iframe src={table.link} />
+                </div>
             </div>
-        </div>
         )
     } else {
         return <div className="loading-page">404</div>

@@ -14,7 +14,7 @@ function Home() {
     })
 
     const { table: categories, load: isLoadingCategories } = useFetch("http://localhost:4000/api/categories")
-    let { table: posts, load: isLoadingPosts, numberPage } = useFetch(data.url)
+    const { table: posts, load: isLoadingPosts, numberPage } = useFetch(data.url)
 
     useEffect(()=>{
         if( data.category === "all") {
