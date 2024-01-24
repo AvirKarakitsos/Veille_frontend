@@ -4,9 +4,10 @@ import Aside from "../../components/Aside"
 import Select from '../../components/Select'
 import { Link } from "react-router-dom"
 import { useFetch } from '../../utils/useFetch'
-import { useEffect, useState } from "react"
+import { useRef, useState } from "react"
 
 function Home() {
+    const divRef = useRef(null)
     const [data, setData] = useState({
         search: "",
         category: "all",
@@ -16,26 +17,24 @@ function Home() {
     const { table: categories, load: isLoadingCategories } = useFetch("http://localhost:4000/api/categories")
     const { table: posts, load: isLoadingPosts, numberPage } = useFetch(data.url)
 
-    useEffect(()=>{
-        if( data.category === "all") {
-            setData((values) => ({...values, url:"http://localhost:4000/api/posts"}))
-        } else {
-            setData((values) => ({...values, url:`http://localhost:4000/api/posts?categoryId=${data.category}`}) )
-        }
-    },[data.category])
-
-    
-
     function onChange(e) {
-        setData({
-            ...data,
-            [e.target.name]: e.target.value
-        })
+        if(e.target.name === "search") {
+            if(e.target.value.length >=3) {
+                setData((values) => ({...values, url:`http://localhost:4000/api/posts?search=${e.target.value}`, search: e.target.value}))
+            } else if(e.target.value.length === 0) {
+                setData((values) => ({...values, url:"http://localhost:4000/api/posts", search: e.target.value}))
+            }
+        } else if(e.target.name === "category") {
+            if( e.target.value === "all") {
+                setData((values) => ({...values, url:"http://localhost:4000/api/posts", category: e.target.value}))
+            } else {
+                setData((values) => ({...values, url:`http://localhost:4000/api/posts?categoryId=${e.target.value}`, category: e.target.value}) )
+            }
 
-        if(e.target.value.length >=3) {
-            setData((values) => ({...values, url:`http://localhost:4000/api/posts?search=${e.target.value}`}))
-        } else if(e.target.value.length === 0) {
-            setData((values) => ({...values, url:"http://localhost:4000/api/posts"}))
+            for(let item of divRef.current.children) {
+                item.classList.remove('active')
+            }
+            divRef.current.children[0]?.classList.add('active')
         }
     }
 
@@ -46,14 +45,13 @@ function Home() {
             else newUrl.searchParams.set("page",e.target.dataset.id)
 
             setData((values) => ({...values, url: newUrl}))
-
+            
             //Change color of page number
-            document.querySelectorAll(".numberPage").forEach((number) => {
-                number.classList.add("inactive")
-            })
-            document.querySelector(".active").classList.remove("active")
-            e.target.classList.add("active")
-            e.target.classList.remove("inactive")
+            for(let item of divRef.current.children) {
+                item.classList.remove('active')
+            }
+            divRef.current.children[e.target.dataset.id-1].classList.add("active")
+            
         } 
     }
 
@@ -67,7 +65,7 @@ function Home() {
                     <input 
                         className={styles["style--input"]} 
                         name='search' type="text" 
-                        onChange={onChange} 
+                        onChange={(e) => setData((values) => ({...values,search: e.target.value}))} 
                         value={data.search} 
                         onInput={onChange}
                         placeholder='Rechercher'
@@ -82,11 +80,11 @@ function Home() {
                 <div className={styles["container--post"]}>
                     {!isLoadingPosts && posts.map((post) => <Post key={post._id} post={post}/>)}
                 </div>
-                <div className={styles.pagination} onClick={changePage}>
+                <div ref={divRef} className={styles.pagination} onClick={changePage}>
                 {numberPage > 1 
                     && Array.from(Array(numberPage + 1).keys()).slice(1).map((page) => {
                         if(page === 1) return <span key={page} data-id={page} className={styles.page+" numberPage active"}>{page}</span>
-                        else return <span key={page} data-id={page} className={styles.page+" numberPage inactive"}>{page}</span>
+                        else return <span key={page} data-id={page} className={styles.page+" numberPage"}>{page}</span>
                     })
                 }
                 </div>

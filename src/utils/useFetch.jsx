@@ -8,34 +8,32 @@ export function useFetch(url) {
     
     useEffect(() => {
         const controller = new AbortController()
-       // const abort = () => controller.abort()
+        //const abort = () => controller.abort()
         //const {signal} = controller.signal
         
         if (!url) return
         async function fetchData() {
-            const response = await fetch(url, {signal:controller.signal})
-            const res = await response.json()
-            let testUrl =  url.href ?? url
+            try {
+                const response = await fetch(url, {signal:controller.signal})
+                const res = await response.json()
+                let testUrl =  url.href ?? url
 
-            if((testUrl === "http://localhost:4000/api/posts") || testUrl.includes("posts?")) {
-                setTable(res.data)
-                setNumberPage(res.numberPages)
-            } 
-            else setTable(res)
-            setLoad(false)
+                if((testUrl === "http://localhost:4000/api/posts") || testUrl.includes("posts?")) {
+                    setTable(res.data)
+                    setNumberPage(res.numberPages)
+                } 
+                else setTable(res)
+                
+                setLoad(false)
+            } catch(err) {
+                if (err.name === 'AbortError') {
+                    console.log('AbortError: Fetch request aborted');
+                }
+            }
         }
         setLoad(true)
+        fetchData()
         
-        let time = setTimeout(() => {
-            fetchData()
-            
-        },1000)
-
-        return () => {
-            clearTimeout(time)
-            controller.abort()
-        }
-
     }, [url])
 
     return { load, table, numberPage }
