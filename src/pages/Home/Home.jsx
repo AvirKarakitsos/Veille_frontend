@@ -18,17 +18,34 @@ function Home() {
     const { table: posts, load: isLoadingPosts, numberPage } = useFetch(data.url)
 
     function onChange(e) {
+        let newUrl = new URL(data.url)
+
         if(e.target.name === "search") {
+            
             if(e.target.value.length >=3) {
-                setData((values) => ({...values, url:`http://localhost:4000/api/posts?search=${e.target.value}`, search: e.target.value}))
+                if(!newUrl.searchParams.has("search")) newUrl.searchParams.append("search",e.target.value)
+                else newUrl.searchParams.set("search",e.target.value)
+                if(newUrl.searchParams.has("page")) newUrl.searchParams.delete("page")
+
+                setData((values) => ({...values, url: newUrl.href}))
             } else if(e.target.value.length === 0) {
-                setData((values) => ({...values, url:"http://localhost:4000/api/posts", search: e.target.value}))
+                newUrl.searchParams.delete("search")
+                if(newUrl.searchParams.has("page")) newUrl.searchParams.delete("page")
+
+                setData((values) => ({...values, url: newUrl.href}))
             }
         } else if(e.target.name === "category") {
             if( e.target.value === "all") {
-                setData((values) => ({...values, url:"http://localhost:4000/api/posts", category: e.target.value}))
+                newUrl.searchParams.delete("categoryId")
+                if(newUrl.searchParams.has("page")) newUrl.searchParams.delete("page")
+
+                setData((values) => ({...values, url: newUrl.href, category: e.target.value}))
             } else {
-                setData((values) => ({...values, url:`http://localhost:4000/api/posts?categoryId=${e.target.value}`, category: e.target.value}) )
+                if(!newUrl.searchParams.has("categoryId")) newUrl.searchParams.append("categoryId",e.target.value)
+                else newUrl.searchParams.set("categoryId",e.target.value)
+                if(newUrl.searchParams.has("page")) newUrl.searchParams.delete("page")
+
+                setData((values) => ({...values, url: newUrl.href, category: e.target.value}) )
             }
 
             for(let item of divRef.current.children) {
@@ -36,6 +53,9 @@ function Home() {
             }
             divRef.current.children[0]?.classList.add('active')
         }
+
+        
+        console.log(newUrl.href)
     }
 
     function changePage(e) {
@@ -44,14 +64,15 @@ function Home() {
             if(!newUrl.searchParams.has("page")) newUrl.searchParams.append("page",e.target.dataset.id)
             else newUrl.searchParams.set("page",e.target.dataset.id)
 
-            setData((values) => ({...values, url: newUrl}))
+            setData((values) => ({...values, url: newUrl.href}))
             
             //Change color of page number
             for(let item of divRef.current.children) {
                 item.classList.remove('active')
             }
             divRef.current.children[e.target.dataset.id-1].classList.add("active")
-            
+          
+            console.log(newUrl.href)
         } 
     }
 
