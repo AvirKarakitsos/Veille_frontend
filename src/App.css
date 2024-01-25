@@ -134,6 +134,7 @@ button a {
 
   .container--right {
     height: 80%;
+    padding: 0 10px;
     flex: auto;
   }
 }
