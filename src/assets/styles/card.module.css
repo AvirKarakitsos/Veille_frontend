@@ -1,7 +1,4 @@
 .container {
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
     transition: transform 250ms;
 }
 
@@ -26,4 +23,11 @@
     font-size: 15px;
     font-weight: 500;
     color: #000;
+}
+
+
+@media screen and (max-width:768px) {
+    .main-container {
+        flex-direction: column;
+    }
 }

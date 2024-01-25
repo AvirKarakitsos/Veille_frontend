@@ -5,13 +5,18 @@ import { Link } from 'react-router-dom'
 const PostContainer = styled.article`
     width: 85%;
     padding: 0px 15px;
-    margin: 15px 0;
+    margin: 12px 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-radius: 10px;
     background: linear-gradient(to left bottom, rgba(250,250,250,1), rgba(250,250,250,.8));
-    box-shadow: 6px 6px 20px rgba(122,122,122,0.2)
+    box-shadow: 6px 6px 20px rgba(122,122,122,0.2);
+
+    @media screen and (max-width:768px) {
+        width: 95%;
+        max-width: 500px;
+    }
 `
 
 function Post({post}) {

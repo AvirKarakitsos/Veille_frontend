@@ -11,3 +11,13 @@
 .container__sub__profil {
     border-radius: 50%;
 }
+
+@media screen and (max-width:768px) {
+    .container__sub {
+        column-gap: 5px;
+    }
+
+    .container__link h3 {
+        font-size: 16px;
+    }
+}

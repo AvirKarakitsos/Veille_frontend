@@ -9,7 +9,7 @@
 }
 
 .container {
-  height: 80vh;
+  height: 85vh;
   width: 55%;
   min-width: 700px;
   display: flex;
@@ -29,8 +29,8 @@
 }
 
 .cercle1 {
-  top: 75%;
-  left: 13%;
+  top: 71%;
+  left: 11%;
 }
 
 .cercle2 {
@@ -111,4 +111,29 @@ button a {
 .error-message {
   margin: 0;
   font-size: 50px;
+}
+
+@media screen and (max-width:768px) {
+  .container {
+    height: 95vh;
+    width: 95%;
+    min-width: 350px;
+    flex-direction: column;
+  }
+
+  .cercle1, .cercle2 {
+    height: 100px;
+    width: 100px;
+  }
+
+  .container--left {
+    height: 20%;
+    max-width: 100%;
+    flex: auto;
+  }
+
+  .container--right {
+    height: 80%;
+    flex: auto;
+  }
 }

@@ -54,8 +54,6 @@ function Home() {
             divRef.current.children[0]?.classList.add('active')
         }
 
-        
-        console.log(newUrl.href)
     }
 
     function changePage(e) {
@@ -72,7 +70,6 @@ function Home() {
             }
             divRef.current.children[e.target.dataset.id-1].classList.add("active")
           
-            console.log(newUrl.href)
         } 
     }
 
@@ -81,22 +78,24 @@ function Home() {
             <Aside/>
             <main className='container--right'>
                 <h1 className={styles["main-title"]}>Veille</h1>
-                <button><Link to="/create">Ajouter un post</Link></button>
-                <form className={styles["container--search"]}>
-                    <input 
-                        className={styles["style--input"]} 
-                        name='search' type="text" 
-                        onChange={(e) => setData((values) => ({...values,search: e.target.value}))} 
-                        value={data.search} 
-                        onInput={onChange}
-                        placeholder='Rechercher'
-                        autoComplete='off'/>
-                
-                    <Select style={styles["style--input"]} string="category" onChange={onChange}>
-                        <option value="all">Tout</option>
-                        {!isLoadingCategories && categories.map((category) => <option key={category._id} value={category._id}>{category.title}</option>)}
-                    </Select>
-                </form>
+                <div className={styles.header}>
+                    <button><Link to="/create">Ajouter un post</Link></button>
+                    <form className={styles["container--search"]}>
+                        <input 
+                            className={styles["style--input"]} 
+                            name='search' type="text" 
+                            onChange={(e) => setData((values) => ({...values,search: e.target.value}))} 
+                            value={data.search} 
+                            onInput={onChange}
+                            placeholder='Rechercher'
+                            autoComplete='off'/>
+
+                        <Select style={styles["style--input"]} string="category" onChange={onChange}>
+                            <option value="all">Tout</option>
+                            {!isLoadingCategories && categories.map((category) => <option key={category._id} value={category._id}>{category.title}</option>)}
+                        </Select>
+                    </form>
+                </div>
                 
                 <div className={styles["container--post"]}>
                     {!isLoadingPosts && posts.map((post) => <Post key={post._id} post={post}/>)}

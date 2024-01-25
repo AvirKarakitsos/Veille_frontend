@@ -16,7 +16,7 @@ function PostPage() {
                 <h2>{table.title}</h2>
                 <div className={styles.section}>
                     <p>Lien: <a href={table.link}>{table.link}</a></p>
-                    <iframe src={table.link} />
+                    {!table.link.inlcudes("playlist?") && <iframe src={table.link} />}
                 </div>
             </div>
         )
