@@ -29,9 +29,12 @@
         justify-content: space-between;
     }
 
+    /*Version 1*/
     .container__link {
         display: contents;
     }
+    
+    /*Version 2*/
     /* .container__link {
         width: 100%;
         overflow-x: hidden;

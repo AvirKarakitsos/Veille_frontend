@@ -125,11 +125,17 @@ button a {
     height: 100px;
     width: 100px;
   }
+  
+  .cercle2 {
+    top: 3%;
+    left: 70%;
+  }
 
   .container--left {
     height: 20%;
     max-width: 100%;
     flex: auto;
+    align-items: center;
   }
 
   .container--right {

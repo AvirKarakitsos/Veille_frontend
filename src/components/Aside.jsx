@@ -40,7 +40,7 @@ function Aside() {
                     <i ref={refIcone} className="fa-solid fa-circle-arrow-down"></i>    
                 </div>
                 : <div  className={styles.icone}>
-                        <i ref={refIcone2} className="fa-solid fa-circle-arrow-down"></i>    
+                        <i ref={refIcone2} className="fa-solid fa-circle-arrow-right"></i>    
                     </div>
                 }
             </div>
