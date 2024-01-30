@@ -17,7 +17,7 @@ function AddPost() {
     const { table:authors, load: isLoadingAuthors } = useFetch("http://localhost:4000/api/authors")
     
     const formAdd = useRef()
-    const formMessage = useRef()
+    const [isValid, setIsValid] = useState(true)
 
     function onChange(e) {
         setData({
@@ -29,8 +29,9 @@ function AddPost() {
     const handleAdd = function(e) {
         e.preventDefault()
         if((data.title === "") || (data.categoryId === "") || (data.authorId === "")) {
-            formMessage.current.innerHTML = "Veuillez compléter tous les champs"
+            setIsValid(false)
         } else {
+            setIsValid(true)
             fetch("http://localhost:4000/api/posts",{
                 method: "POST",
                 headers: {
@@ -53,7 +54,6 @@ function AddPost() {
                     return response.json()
                 })
                 .then(response => {
-                    formMessage.current.innerHTML = ""
                     console.log(response.message)
                 })
                 .catch(err => console.log(err.message))
@@ -103,7 +103,7 @@ function AddPost() {
                     </Select>}
                 </label>
 
-                <p ref={formMessage}></p>
+                {!isValid && <p>Veuillez compléter tous les champs</p>}
 
                 <button type="submit">Valider</button>
             </fieldset>
