@@ -1,6 +1,5 @@
 import styles from '../assets/styles/card.module.css'
 import { Link } from 'react-router-dom'
-//import { useEffect, useState } from "react"
 import { useViewport } from '../utils/useViewport'
 
 function Card({author}) {

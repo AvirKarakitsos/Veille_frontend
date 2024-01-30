@@ -4,10 +4,24 @@ import Aside from "../../components/Aside"
 import Select from '../../components/Select'
 import { Link } from "react-router-dom"
 import { useFetch } from '../../utils/useFetch'
-import { useRef, useState } from "react"
+import { useState } from "react"
+import styled from "styled-components"
+
+const StyleSpan = styled.span `
+    height: 25px;
+    width: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    border-radius: 50%;
+    cursor: default;
+    z-index: 30;
+    background: ${props => props.isActive === props.id ? "linear-gradient(to right top, var(--blue1), var(--blue2))" : "linear-gradient(to left bottom, rgba(250,250,250,.5), rgba(250,250,250,.8))"};
+`
 
 function Home() {
-    const divRef = useRef(null)
+    const [number, setNumber] = useState(1)
     const [data, setData] = useState({
         search: "",
         category: "all",
@@ -48,28 +62,23 @@ function Home() {
                 setData((values) => ({...values, url: newUrl.href, category: e.target.value}) )
             }
 
-            for(let item of divRef.current.children) {
-                item.classList.remove('active')
-            }
-            divRef.current.children[0]?.classList.add('active')
+            //Color the page number
+            setNumber(1)
         }
 
     }
 
     function changePage(e) {
         if(e.target.dataset.id) {
+            let idPage = parseInt(e.target.dataset.id)
             let newUrl = new URL(data.url)
-            if(!newUrl.searchParams.has("page")) newUrl.searchParams.append("page",e.target.dataset.id)
-            else newUrl.searchParams.set("page",e.target.dataset.id)
-
+            if(!newUrl.searchParams.has("page")) newUrl.searchParams.append("page",idPage)
+            else newUrl.searchParams.set("page",idPage)
+    
             setData((values) => ({...values, url: newUrl.href}))
             
             //Change color of page number
-            for(let item of divRef.current.children) {
-                item.classList.remove('active')
-            }
-            divRef.current.children[e.target.dataset.id-1].classList.add("active")
-          
+            setNumber(idPage)
         } 
     }
 
@@ -100,12 +109,9 @@ function Home() {
                 <div className={styles["container--post"]}>
                     {!isLoadingPosts && posts.map((post) => <Post key={post._id} post={post}/>)}
                 </div>
-                <div ref={divRef} className={styles.pagination} onClick={changePage}>
+                <div className={styles.pagination} onClick={changePage}>
                 {numberPage > 1 
-                    && Array.from(Array(numberPage + 1).keys()).slice(1).map((page) => {
-                        if(page === 1) return <span key={page} data-id={page} className={styles.page+" numberPage active"}>{page}</span>
-                        else return <span key={page} data-id={page} className={styles.page+" numberPage"}>{page}</span>
-                    })
+                    && Array.from(Array(numberPage + 1).keys()).slice(1).map((page) => <StyleSpan key={page} data-id={page} id={page} isActive={number}>{page}</StyleSpan>)
                 }
                 </div>
             </main>
